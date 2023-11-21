@@ -1,0 +1,28 @@
+label {
+    margin-right: 1rem;
+    color: var(--miw-text-color-gray);
+    font-weight: bold;
+    text-align: start;
+}
+
+.preference-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#btnStorePreferences {
+    margin-right: 1rem;
+}
+
+.preference-number-input {
+    width: 10rem;
+}
+
+@media (width<=768px) {
+    .preference-name {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}

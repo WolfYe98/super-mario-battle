@@ -1,0 +1,45 @@
+<div class="w-50 h-75 mt-5 custom-card position-relative">
+  <div class="custom-title">{{title}}</div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 flex-center-row">
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-6 preference-name">
+          <label for="ufo-number-preference">Bomb Numbers:</label>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+          <input [class]="bombInput.classes" type="number" id="ufo-number-preference" name="ufo-number-preference"
+            [(ngModel)]="bombInput.value" [min]="bombInput.min" [max]="bombInput.max" (input)="clearError(bombInput)" />
+          <div class="text-danger position-absolute" *ngIf="bombInput.invalid">
+            {{bombInput.errMsg}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-12 col-lg-12 flex-center-row">
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-6 preference-name">
+          <label for="game-time-preference">Game Time (s):</label>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+          <input [class]="timeInput.classes" type="number" id="game-time-preference" name="game-time-preference"
+            [(ngModel)]="timeInput.value" [min]="timeInput.min" [max]="timeInput.max" (input)="clearError(timeInput)" />
+          <div class="text-danger position-absolute" *ngIf="timeInput.invalid">
+            {{timeInput.errMsg}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row flex-center-row mt-5">
+    <div class="col-12 col-md-6 col-lg-6">
+      <input class="btn btn-primary" (click)="savePreferences()" type="submit" value="Store Preferences"
+        id="btnStorePreferences">
+    </div>
+    <div class="col-12 col-md-6 col-lg-6">
+      <input class="btn btn-danger" (click)="resetPreferences()" type="button" value="Reset Preferences"
+        id="btnResetPreferences">
+    </div>
+  </div>
+</div>

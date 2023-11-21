@@ -1,0 +1,26 @@
+<div class="custom-card w-50 h-75 position-relative flex-center">
+    <div class="custom-title ">
+        Login
+    </div>
+    <form id="loginForm">
+        <div class="mb-4 position-relative">
+            <label for="login-username">User:</label>
+            <input type="text" [class]="userNameInput.classes" id="login-username" placeholder="User name"
+                [(ngModel)]="userNameInput.value" name="login-username" (input)="clearError(userNameInput)" />
+            <div class="text-danger position-absolute" *ngIf="userNameInput.invalid">
+                {{userNameInput.errMsg}}
+            </div>
+        </div>
+        <div class="mb-4 position-relative">
+            <label for="login-password" class="form-label">Password:</label>
+            <input type="password" [class]="passwordInput.classes" id="login-password" placeholder="Password"
+                [(ngModel)]="passwordInput.value" name="login-password" (input)="clearError(passwordInput)" />
+            <div class="text-danger position-absolute" *ngIf="passwordInput.invalid">
+                {{passwordInput.errMsg}}
+            </div>
+        </div>
+        <input type="button" value="Login" class="btn btn-primary" id="btnLogin" (click)="login()">
+        <div *ngIf="errorMsg !== ''" class="text-danger position-absolute" id="invalidLoginText">
+            {{errorMsg}}</div>
+    </form>
+</div>

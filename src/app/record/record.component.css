@@ -1,0 +1,9 @@
+.overflow-y-scroll {
+    overflow-y: scroll;
+}
+
+.flex-row-hcenter {
+    display: flex;
+    flex-direction: row;
+    
+}

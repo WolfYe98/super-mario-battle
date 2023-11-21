@@ -1,0 +1,26 @@
+<div class="flex-center w-100 h-75">
+    <div class="custom-card position-relative flex-column-start" id="game-board" #board>
+        <div class="score-board">
+            <div class="score-board-title">
+                Time
+            </div>
+            <div id="timer">
+                {{time | date:'mm:ss'}}
+            </div>
+            <div class="score-board-title">
+                Punctuation
+            </div>
+            <div id="punctuation">
+                {{punctuation}}
+            </div>
+            <input class="btn btn-primary mt-2" type="button" value="Play" id="btnPlay" *ngIf="playButton"
+                (click)="play()">
+            <input class="btn btn-primary mt-2" type="button" value="Play Again" id="btnReplay" *ngIf="playAgainButton"
+                (click)="replayGame()">
+        </div>
+        <div *ngFor="let ufo of ufos" class="w-100 position-relative ufo-row mt-2">
+            <img [src]="ufo.ufoImgSrc" class="ufo" #ufoRef />
+        </div>
+        <img [src]="misileObj.imgSrc" #misile id="misile" />
+    </div>
+</div>

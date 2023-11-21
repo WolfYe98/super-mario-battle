@@ -1,0 +1,52 @@
+<div class="custom-card w-75 h-75 position-relative flex-column-vstart">
+    <div class="custom-title">Records</div>
+    <div class="flex-center w-100 h-100" id="middle-message" *ngIf="!hasRecords()">
+        <h1 id="record-message">Loading records...</h1>
+    </div>
+    <div class="row w-100 h-75 d-flex align-items-center">
+        <div [class]="getTableClasses()" *ngIf="records.length>0">
+            <table class="table table-sm table-striped table-bordered w-75 under-title" id="records">
+                <thead class="table-success">
+                    <th></th>
+                    <th scope="col" class="col-2">User</th>
+                    <th scope="col" class="col-2">Points</th>
+                    <th scope="col" class="col-2">Bombs</th>
+                    <th scope="col" class="col-2">Secs</th>
+                    <th scope="col" class="col-3">Date</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let record of records; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{record.username}}</td>
+                        <td>{{record.punctuation}}</td>
+                        <td>{{record.ufos}}</td>
+                        <td>{{record.disposedTime}}</td>
+                        <td>{{record.recordDate | date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div [class]="getTableClasses()" *ngIf="currentUserRecords.length>0">
+            <table class="table table-sm table-striped table-bordered w-75 under-title" id="records">
+                <thead class="table-success">
+                    <th></th>
+                    <th scope="col" class="col-2">User</th>
+                    <th scope="col" class="col-2">Points</th>
+                    <th scope="col" class="col-2">Bombs</th>
+                    <th scope="col" class="col-2">Secs</th>
+                    <th scope="col" class="col-3">Date</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let record of currentUserRecords; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{record.username}}</td>
+                        <td>{{record.punctuation}}</td>
+                        <td>{{record.ufos}}</td>
+                        <td>{{record.disposedTime}}</td>
+                        <td>{{record.recordDate | date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
