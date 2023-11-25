@@ -14,7 +14,7 @@ export class UFO {
     }
     initializeRandomPosition(): void {
         let ufoPos = this.getRandomUFOStartPosition();
-        this.ufoRef.nativeElement.style.left = ufoPos + 'px';
+        this.renderer.setStyle(this.ufoRef.nativeElement, 'left', ufoPos + 'px');
         this.randomizeStartDirection();
     }
     randomizeStartDirection(): void {
@@ -46,9 +46,9 @@ export class UFO {
 
     private changeUFOImgDirection() {
         if (this.ufoMovePxs < 0) {
-            this.ufoRef.nativeElement.style.transform = 'scaleX(-1)';
+            this.renderer.setStyle(this.ufoRef.nativeElement, 'transform', 'scaleX(-1)');
         } else {
-            this.ufoRef.nativeElement.style.transform = 'scaleX(1)';
+            this.renderer.setStyle(this.ufoRef.nativeElement, 'transform', 'scaleX(1)');
         }
     }
     moveUFO(): void {
@@ -62,7 +62,7 @@ export class UFO {
                 this.ufoMovePxs *= -1;
                 this.changeUFOImgDirection();
             }
-            this.ufoRef.nativeElement.style.left = (hpos_ufo + this.ufoMovePxs) + 'px';
+            this.renderer.setStyle(this.ufoRef.nativeElement, 'left', (hpos_ufo + this.ufoMovePxs) + 'px');
         }, 25);
     }
     stopUFO(): void {
@@ -73,7 +73,7 @@ export class UFO {
         let rightUFO = this.getUFOLeftPxs() + this.getUFOWidth() + 8;
         let rightBoard = GameBoard.getGameBoardWidth();
         if (rightUFO > rightBoard) {
-            this.ufoRef.nativeElement.style.left = (rightBoard - (this.getUFOWidth() + 8)) + 'px';
+            this.renderer.setStyle(this.ufoRef.nativeElement, 'left', (rightBoard - (this.getUFOWidth() + 8)) + 'px');
         }
     }
     setHitImage(): void {

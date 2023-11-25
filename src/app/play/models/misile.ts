@@ -1,4 +1,4 @@
-import { ElementRef } from "@angular/core";
+import { ElementRef, Renderer2 } from "@angular/core";
 import { GameBoard } from "./gameBoard";
 
 export class Misile {
@@ -11,7 +11,8 @@ export class Misile {
     private imgSrcTail: string = ".png";
     private bottomPxs: number = 0;
     imgSrc: string = this.imgSrcHead + this.imgPrefix + this.imgSuffix + this.imgSrcTail;
-    constructor(misileRef: ElementRef) {
+
+    constructor(misileRef: ElementRef, private renderer: Renderer2) {
         this.misileRef = misileRef;
     }
     moveMisileRight(): void {
@@ -20,14 +21,14 @@ export class Misile {
         let gameBoardWidth = GameBoard.getGameBoardWidth();
         if ((misileLeftPxs + misileWidth + 8) < gameBoardWidth) {
             this.changeImgInMovement();
-            this.misileRef.nativeElement.style.left = (misileLeftPxs + Misile.PIXEL_LEFT_RIGHT) + 'px';
+            this.renderer.setStyle(this.misileRef.nativeElement, 'left', (misileLeftPxs + Misile.PIXEL_LEFT_RIGHT) + 'px');
         }
     }
     moveMisileLeft(): void {
         let misileLeftPxs = this.getMisileLeftPixels();
         if (misileLeftPxs > 2) {
             this.changeImgInMovement();
-            this.misileRef.nativeElement.style.left = (misileLeftPxs - Misile.PIXEL_LEFT_RIGHT) + 'px';
+            this.renderer.setStyle(this.misileRef.nativeElement, 'left', (misileLeftPxs - Misile.PIXEL_LEFT_RIGHT) + 'px');
         }
     }
     private changeImgInMovement(): void {
@@ -53,7 +54,7 @@ export class Misile {
     }
     resetToBottom(): void {
         this.bottomPxs = 0;
-        this.misileRef.nativeElement.style.bottom = '0px';
+        this.renderer.setStyle(this.misileRef.nativeElement, 'bottom', '0px');
         this.changeToMisileImage();
     }
     changeToMissileLaunchImage(): void {
@@ -67,14 +68,13 @@ export class Misile {
     }
     moveMisileUp(): void {
         this.bottomPxs += Misile.PIXEL_UP;
-        this.misileRef.nativeElement.style.bottom = this.bottomPxs + 'px';
+        this.renderer.setStyle(this.misileRef.nativeElement, 'bottom', this.bottomPxs + 'px');
     }
     resizeMisile(): void {
         let gameBoardWidth: number = GameBoard.getGameBoardWidth();
         let misileWidth: number = this.getMisileWidth();
-        console.log({ left: this.getMisileLeftPixels(), width: gameBoardWidth });
         if ((this.getMisileLeftPixels() + misileWidth + 8) >= gameBoardWidth - 1) {
-            this.misileRef.nativeElement.style.left = (gameBoardWidth - misileWidth) + 'px';
+            this.renderer.setStyle(this.misileRef.nativeElement, 'left', (gameBoardWidth - misileWidth) + 'px');
         }
     }
     getHorizontalMiddle() {

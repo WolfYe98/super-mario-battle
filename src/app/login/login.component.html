@@ -3,7 +3,7 @@
         Login
     </div>
     <form id="loginForm">
-        <div class="mb-4 position-relative">
+        <div class="mb-4 ">
             <label for="login-username">User:</label>
             <input type="text" [class]="userNameInput.classes" id="login-username" placeholder="User name"
                 [(ngModel)]="userNameInput.value" name="login-username" (input)="clearError(userNameInput)" />
@@ -11,7 +11,7 @@
                 {{userNameInput.errMsg}}
             </div>
         </div>
-        <div class="mb-4 position-relative">
+        <div class="mb-4">
             <label for="login-password" class="form-label">Password:</label>
             <input type="password" [class]="passwordInput.classes" id="login-password" placeholder="Password"
                 [(ngModel)]="passwordInput.value" name="login-password" (input)="clearError(passwordInput)" />

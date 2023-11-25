@@ -10,9 +10,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayComponent } from './play/play.component';
 import { RecordComponent } from './record/record.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AcceptCancelModalComponent } from './modalComponents/accept-cancel-modal/accept-cancel-modal.component';
+import { TokenInterceptorService } from './shared/services/interceptors/token-interceptor.service';
+import { TokenExpiredInterceptorService } from './shared/services/interceptors/token-expired-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,9 @@ import { LogoutComponent } from './logout/logout.component';
     PlayComponent,
     RecordComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegisterComponent,
+    AcceptCancelModalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,14 +38,26 @@ import { LogoutComponent } from './logout/logout.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 1500,
-      toastClass: 'ngx-toastr toast-opacity ',
       closeButton: true,
-      preventDuplicates: true
+      preventDuplicates: true,
+      timeOut: 1500,
+      toastClass: 'ngx-toastr toast-opacity '
     }),
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenExpiredInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

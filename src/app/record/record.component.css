@@ -5,5 +5,10 @@
 .flex-row-hcenter {
     display: flex;
     flex-direction: row;
-    
+}
+
+@media (width < 992px) {
+    .custom-card {
+        height: 100% !important;
+    }
 }

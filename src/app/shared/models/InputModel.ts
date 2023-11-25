@@ -3,17 +3,29 @@ export class InputModel {
     classes: string = "";
     errMsg: string = "";
     value: any = "";
-    checkValueRequired(): void {
+    checkValueRequired(errMsg?: string): void {
         if (!this.invalid && !this.value) {
-            this.invalid = true;
-            this.errMsg = "This field is required";
-            this.classes += " border-red";
+            this.addError(errMsg ?? "This field is required");
         }
     }
-    clearError() {
+    checkValueIsEqualTo(otherValue: string, errMsg?: string): void {
+        if (!this.invalid && this.value != otherValue) {
+            this.addError(errMsg ?? 'This field value differs');
+        }
+    }
+    clearError(): void {
         this.invalid = false;
         this.errMsg = "";
         this.classes = this.classes.replace('border-red', '');
+    }
+    addError(errMsg?: string): void {
+        this.invalid = true;
+        this.errMsg = errMsg ?? "";
+        this.classes += " border-red";
+    }
+    resetInput(): void {
+        this.clearError();
+        this.value = null;
     }
 }
 
@@ -21,11 +33,10 @@ export class InputTextModel extends InputModel {
     constructor() {
         super();
     }
-    checkValueWithRegExp(regExp: RegExp) {
+    checkValueWithRegExp(regExp: RegExp, errMsg?: string) {
         let isOk = regExp.test(this.value);
         if (!this.invalid && !isOk) {
-            this.invalid = true;
-            this.errMsg = 'This field has an invalid value';
+            this.addError(errMsg ?? 'This field has an invalid value');
         }
         return isOk;
     }
@@ -36,10 +47,9 @@ export class InputNumberModel extends InputModel {
     constructor() {
         super();
     }
-    checkValueInRange(): void {
+    checkValueInRange(errMsg?: string): void {
         if (!this.invalid && (this.value < this.min || this.value > this.max)) {
-            this.invalid = true;
-            this.errMsg = "The value is out of range [" + this.min + "," + this.max + "]";
+            this.addError(errMsg ?? "The value is out of range [" + this.min + "," + this.max + "]");
         }
     }
 }

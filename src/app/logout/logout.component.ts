@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent {
   constructor(private sessionStorageService: SessionStorageService, private router: Router) {
-    this.sessionStorageService.setAuthTokenToSession(null);
+    this.sessionStorageService.deleteUserFromSession();
     this.router.navigate(['/login']);
   }
-
 }

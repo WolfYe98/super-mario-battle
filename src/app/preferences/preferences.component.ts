@@ -59,9 +59,7 @@ export class PreferencesComponent extends ComponentWithInputModel {
     this.preferenceSubscription.unsubscribe();
   }
   savePreferences(): void {
-    let bombOk: boolean = this.checkInput(this.bombInput);
-    let timeOk: boolean = this.checkInput(this.timeInput);
-    if (bombOk && timeOk) {
+    if (this.checkInputs()) {
       this.saveAllPreferences();
       this.toast.showSuccessToast({ title: 'Success', message: 'Preferences stored' });
     } else {
@@ -72,13 +70,14 @@ export class PreferencesComponent extends ComponentWithInputModel {
     this.preferenceService.setIntegerItem({ key: PREFERENCES.bombNumber, value: this.bombInput.value });
     this.preferenceService.setIntegerItem({ key: PREFERENCES.timeNumber, value: this.timeInput.value });
   }
+  override checkInputs(): boolean {
+    let bombOk: boolean = this.checkInput(this.bombInput);
+    let timeOk: boolean = this.checkInput(this.timeInput);
+    return bombOk && timeOk;
+  }
   checkInput(input: InputNumberModel): boolean {
     input.checkValueRequired();
     input.checkValueInRange();
-    input.classes = this.defaultInputClass;
-    if (input.invalid) {
-      input.classes = this.errClass;
-    }
     return !input.invalid;
   }
   resetPreferences(): void {

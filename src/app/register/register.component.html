@@ -1,0 +1,37 @@
+<div class="custom-card w-50 h-75 position-relative flex-center">
+    <div class="custom-title ">
+        Register
+    </div>
+    <form>
+        <div class="mb-4">
+            <label for="register-username">User:</label>
+            <input type="text" [class]="usernameInput.classes" id="register-username" placeholder="User name"
+                (input)="clearError(usernameInput)" name="username" [(ngModel)]="usernameInput.value"
+                (focusout)="checkUsernameExists()" />
+            <div class="text-danger position-absolute">{{usernameInput.errMsg}}</div>
+        </div>
+        <div class="mb-4">
+            <label for="register-email" class="form-label">Email address:</label>
+            <input type="email" [class]="emailInput.classes" id="register-email" placeholder="name@example.com"
+                (input)="clearError(emailInput)" name="email" [(ngModel)]="emailInput.value" />
+            <div class="text-danger position-absolute">{{emailInput.errMsg}}</div>
+        </div>
+        <div class="mb-4">
+            <label for="register-passwd" class="form-label">Password:</label>
+            <input type="password" [class]="passwdInput.classes" id="register-passwd" placeholder="Password"
+                (input)="clearError(passwdInput)" name="password" [(ngModel)]="passwdInput.value" />
+            <div class="text-danger position-absolute">{{passwdInput.errMsg}}</div>
+        </div>
+        <div class="mb-4">
+            <label for="register-repeat-passwd" class="form-label">Repeat password:</label>
+            <input type="password" [class]="repeatPassWdInput.classes" id="register-repeat-passwd"
+                placeholder="Repeat Password" (input)="clearError(repeatPassWdInput)" name="repeatPassword"
+                [(ngModel)]="repeatPassWdInput.value" />
+            <div class="text-danger position-absolute">{{repeatPassWdInput.errMsg}}</div>
+        </div>
+        <input type="button" (click)="register()" value="Register" class="btn btn-primary" id="btnRegister">
+        <div class="text-danger position-absolute" *ngIf="errorMsg!=''">
+            {{errorMsg}}
+        </div>
+    </form>
+</div>

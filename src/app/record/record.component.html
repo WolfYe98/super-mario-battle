@@ -3,9 +3,9 @@
     <div class="flex-center w-100 h-100" id="middle-message" *ngIf="!hasRecords()">
         <h1 id="record-message">Loading records...</h1>
     </div>
-    <div class="row w-100 h-75 d-flex align-items-center">
+    <div class="row w-100 h-100 d-flex align-items-center justify-content-center">
         <div [class]="getTableClasses()" *ngIf="records.length>0">
-            <table class="table table-sm table-striped table-bordered w-75 under-title" id="records">
+            <table class="table table-sm table-striped table-bordered w-100 " id="records">
                 <thead class="table-success">
                     <th></th>
                     <th scope="col" class="col-2">User</th>
@@ -26,10 +26,20 @@
                 </tbody>
             </table>
         </div>
-        <div [class]="getTableClasses()" *ngIf="currentUserRecords.length>0">
-            <table class="table table-sm table-striped table-bordered w-75 under-title" id="records">
+    </div>
+</div>
+<div class="custom-card w-75 h-75 position-relative flex-column-vstart mt-4" *ngIf="currentUserRecords.length>0">
+    <div class="custom-title">Current user records</div>
+    <div class="row w-100 h-100 d-flex align-items-center justify-content-center">
+        <div [class]="getTableClasses()">
+            <table class="table table-sm table-striped table-bordered w-100" id="records">
                 <thead class="table-success">
-                    <th></th>
+                    <th class="bg-transparent">
+                        <button type="button" class="bg-transparent p-0 border-0 btn btn-outline-danger"
+                            title="Delete Records" (click)="deleteRecords()">
+                            <i class="bi bi-x-square-fill bg-transparent text-danger"></i>
+                        </button>
+                    </th>
                     <th scope="col" class="col-2">User</th>
                     <th scope="col" class="col-2">Points</th>
                     <th scope="col" class="col-2">Bombs</th>

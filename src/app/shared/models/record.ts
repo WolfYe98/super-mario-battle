@@ -5,3 +5,8 @@ export type Record = {
     disposedTime: number,
     recordDate: number
 }
+export type Result = {
+    punctuation: number,
+    ufos: number,
+    disposedTime: number
+}
